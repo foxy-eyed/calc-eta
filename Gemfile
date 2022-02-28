@@ -10,6 +10,7 @@ gem "dotenv"
 gem "dry-monads"
 gem "faraday"
 gem "hanami-api"
+gem "hanami-validations", github: "hanami/validations", branch: "main"
 gem "puma"
 gem "rack"
 

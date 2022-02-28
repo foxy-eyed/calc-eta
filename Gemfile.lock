@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/hanami/validations.git
+  revision: eec36c6961be9f07d53880851ac1d7e7eef53ae7
+  branch: main
+  specs:
+    hanami-validations (2.0.0.alpha2)
+      dry-validation (~> 1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -9,11 +17,41 @@ GEM
       rexml
     diff-lcs (1.5.0)
     dotenv (2.7.6)
+    dry-configurable (0.14.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.6)
+    dry-container (0.9.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.13, >= 0.13.0)
     dry-core (0.7.1)
       concurrent-ruby (~> 1.0)
+    dry-inflector (0.2.1)
+    dry-initializer (3.1.1)
+    dry-logic (1.2.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.5, >= 0.5)
     dry-monads (1.4.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.7)
+    dry-schema (1.9.1)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.13, >= 0.13.0)
+      dry-core (~> 0.5, >= 0.5)
+      dry-initializer (~> 3.0)
+      dry-logic (~> 1.0)
+      dry-types (~> 1.5)
+    dry-types (1.5.1)
+      concurrent-ruby (~> 1.0)
+      dry-container (~> 0.3)
+      dry-core (~> 0.5, >= 0.5)
+      dry-inflector (~> 0.1, >= 0.1.2)
+      dry-logic (~> 1.0, >= 1.0.2)
+    dry-validation (1.8.0)
+      concurrent-ruby (~> 1.0)
+      dry-container (~> 0.7, >= 0.7.1)
+      dry-core (~> 0.5, >= 0.5)
+      dry-initializer (~> 3.0)
+      dry-schema (~> 1.9, >= 1.9.1)
     faraday (2.2.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
@@ -84,6 +122,7 @@ DEPENDENCIES
   dry-monads
   faraday
   hanami-api
+  hanami-validations!
   puma
   rack
   rspec
