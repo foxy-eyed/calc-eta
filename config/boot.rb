@@ -2,5 +2,15 @@
 
 require "rubygems"
 require "bundler/setup"
+require "dotenv"
+
+Dotenv.load(".env", ".env.#{ENV['RACK_ENV']}")
 
 Bundler.require :default, ENV["RACK_ENV"]
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "app"))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+Dir[File.expand_path("../lib/**/*.rb", __dir__)].each { |f| require f }
+Dir[File.expand_path("../app/**/*.rb", __dir__)].each { |f| require f }

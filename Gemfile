@@ -6,6 +6,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.0"
 
+gem "dotenv"
+gem "faraday"
 gem "hanami-api"
 gem "puma"
 gem "rack"

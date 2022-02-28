@@ -2,6 +2,11 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    dotenv (2.7.6)
+    faraday (2.2.0)
+      faraday-net_http (~> 2.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (2.0.1)
     hanami-api (0.2.0)
       hanami-router (~> 2.0.alpha)
     hanami-router (2.0.0.alpha6)
@@ -43,6 +48,8 @@ PLATFORMS
   x86_64-darwin-18
 
 DEPENDENCIES
+  dotenv
+  faraday
   hanami-api
   puma
   rack
