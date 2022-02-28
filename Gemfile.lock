@@ -78,6 +78,7 @@ GEM
       nio4r (~> 2.0)
     rack (2.2.3)
     rainbow (3.1.1)
+    rake (13.0.6)
     regexp_parser (2.2.1)
     rexml (3.2.5)
     rspec (3.11.0)
@@ -125,6 +126,7 @@ DEPENDENCIES
   hanami-validations!
   puma
   rack
+  rake
   rspec
   rubocop
   rubocop-rspec

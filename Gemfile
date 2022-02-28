@@ -13,6 +13,7 @@ gem "hanami-api"
 gem "hanami-validations", github: "hanami/validations", branch: "main"
 gem "puma"
 gem "rack"
+gem "rake"
 
 group :development, :test do
   gem "rubocop", require: false
