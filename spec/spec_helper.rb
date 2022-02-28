@@ -2,7 +2,11 @@
 
 ENV["RACK_ENV"] = "test"
 
+require "webmock/rspec"
 require File.expand_path("../config/application", __dir__)
+Dir[File.expand_path("support/**/*.rb", __dir__)].each { |f| require f }
+
+WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -16,4 +20,6 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.order = :random
   Kernel.srand config.seed
+
+  config.include LoadFixture
 end
