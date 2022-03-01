@@ -65,6 +65,8 @@ GEM
       rack (~> 2.0)
     hansi (0.2.0)
     hashdiff (1.0.1)
+    mock_redis (0.30.0)
+      ruby2_keywords
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     mustermann-contrib (1.1.1)
@@ -132,6 +134,7 @@ DEPENDENCIES
   faraday
   hanami-api
   hanami-validations!
+  mock_redis
   puma
   rack
   rake

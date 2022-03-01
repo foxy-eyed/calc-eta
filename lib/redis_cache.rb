@@ -36,10 +36,28 @@ class RedisCache
     value
   end
 
+  def reset!
+    raise "Non-fake storage cannot be reset!" unless self.class.fake
+
+    redis.flushdb
+  end
+
+  class << self
+    attr_reader :fake
+
+    def fake!
+      @fake = true
+    end
+  end
+
   private
 
   def redis
-    @redis ||= Redis.new(url: ENV.fetch("REDIS_URL", DEFAULT_REDIS_URL), db: DB_KEY)
+    @redis ||= if self.class.fake
+                 MockRedis.new
+               else
+                 Redis.new(url: ENV.fetch("REDIS_URL", DEFAULT_REDIS_URL), db: DB_KEY)
+               end
   end
 
   def inner_key(key)

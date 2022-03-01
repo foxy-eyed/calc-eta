@@ -10,6 +10,7 @@ require File.expand_path("../config/application", __dir__)
 Dir[File.expand_path("support/**/*.rb", __dir__)].each { |f| require f }
 
 WebMock.disable_net_connect!(allow_localhost: true)
+RedisCache.fake!
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -25,4 +26,8 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include LoadFixture
+
+  config.before do
+    CalcEta.cache.reset!
+  end
 end
