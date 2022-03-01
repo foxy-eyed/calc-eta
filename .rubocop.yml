@@ -8,6 +8,9 @@ Layout/SpaceInLambdaLiteral:
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
+Metrics/AbcSize:
+  Max: 20
+
 Metrics/MethodLength:
   CountAsOne: ["array", "heredoc"]
 

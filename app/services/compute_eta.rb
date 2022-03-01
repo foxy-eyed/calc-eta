@@ -9,6 +9,16 @@ class ComputeEta
 
   attr_reader :validator, :car_locator, :arrival_predictor
 
+  Location = Struct.new(:lat, :lng, keyword_init: true) do
+    def cache_key
+      [lat, lng].map { |v| format("%.6f", v) }.join(":") # https://en.wikipedia.org/wiki/Decimal_degrees#Precision
+    end
+
+    def coordinates
+      to_h
+    end
+  end
+
   def initialize(validator = LocationValidator.new,
                  car_locator = LocateNearbyCars.new,
                  arrival_predictor = PredictArrival.new)
@@ -19,9 +29,14 @@ class ComputeEta
 
   def call(params)
     location_params = yield validator.call(params)
-    cars_coordinates = yield car_locator.call(**location_params.to_h)
-    cars_eta_array = yield arrival_predictor.call(target: location_params.to_h, source: cars_coordinates)
+    target_location = Location.new(**location_params.to_h)
 
-    Success(cars_eta_array.min)
+    eta = CalcEta.cache.fetch(target_location.cache_key) do
+      cars_coordinates = yield car_locator.call(**target_location.coordinates)
+      cars_eta_array = yield arrival_predictor.call(target: target_location.coordinates, source: cars_coordinates)
+      cars_eta_array.min
+    end
+
+    Success(eta.to_i)
   end
 end
