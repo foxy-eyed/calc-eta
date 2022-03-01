@@ -26,6 +26,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.include LoadFixture
+  config.include ApiHelpers, type: :request
 
   config.before do
     CalcEta.cache.reset!

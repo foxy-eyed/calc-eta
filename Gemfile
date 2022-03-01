@@ -23,6 +23,7 @@ end
 
 group :test do
   gem "mock_redis"
+  gem "rack-test"
   gem "rspec"
   gem "simplecov", require: false
   gem "webmock"
