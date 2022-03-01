@@ -17,5 +17,7 @@ module CalcEta
         [500, json(error: error)]
       end
     end
+
+    get "/documentation", to: CalcEta::Documentation.new
   end
 end

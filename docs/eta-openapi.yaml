@@ -1,0 +1,71 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: Calc ETA service
+  description: Service for calculating ETA — estimated time when car is expected to arrive at a specific location
+
+paths:
+  /eta:
+    get:
+      description: Fetch ETA
+      parameters:
+        - name: lat
+          in: query
+          description: Latitude
+          required: true
+          allowEmptyValue: false
+          schema:
+            type: number
+            format: float
+            minimum: -90.0
+            maximum: 90.0
+          example: 53.21590
+        - name: lng
+          in: query
+          description: Longitude
+          required: true
+          allowEmptyValue: false
+          schema:
+            type: number
+            format: float
+            minimum: -180.0
+            maximum: 180.0
+          example: 50.132277
+      responses:
+        '200':
+          description: Successfully returned ETA
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eta:
+                    type: integer
+                    example: 5
+        '422':
+          description: Invalid location params
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      lat:
+                        type: string
+                        example: "is missing"
+                      lng:
+                        type: string
+                        example: "must be in range -180.0..180.0"
+        '500':
+          description: Calculation failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "[WheelyApi]: execution expired"
