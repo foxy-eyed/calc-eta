@@ -1,0 +1,25 @@
+services:
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file: ./docker/.env.development
+    ports:
+      - "9292:9292"
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app
+    command: bundle exec puma
+  test:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file: ./docker/.env.test
+    volumes:
+      - .:/usr/src/app
+    command: bundle exec rspec
