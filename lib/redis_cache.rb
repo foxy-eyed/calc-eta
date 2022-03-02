@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class RedisCache
-  DEFAULT_REDIS_URL = "redis://127.0.0.1:6379"
-  DB_KEY = 1
+  DEFAULT_REDIS_URL = "redis://127.0.0.1:6379/1"
 
   attr_reader :expires_in, :key_prefix
 
@@ -56,7 +55,7 @@ class RedisCache
     @redis ||= if self.class.fake
                  MockRedis.new
                else
-                 Redis.new(url: ENV.fetch("REDIS_URL", DEFAULT_REDIS_URL), db: DB_KEY)
+                 Redis.new(url: ENV.fetch("REDIS_URL", DEFAULT_REDIS_URL))
                end
   end
 
