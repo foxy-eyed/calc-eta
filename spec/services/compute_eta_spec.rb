@@ -4,7 +4,10 @@
 describe ComputeEta do
   include Dry::Monads[:result]
 
-  subject(:compute_eta) { described_class.new(validator, car_locator, arrival_predictor).call(location) }
+  subject(:compute_eta) do
+    described_class.new(validator: validator, car_locator: car_locator, arrival_predictor: arrival_predictor)
+                   .call(location)
+  end
 
   let(:validator) { instance_double(LocationValidator) }
   let(:car_locator) { instance_double(LocateNearbyCars) }
