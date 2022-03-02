@@ -4,7 +4,7 @@ module ApiHelpers
   include Rack::Test::Methods
 
   def app
-    @app ||= CalcEta::App.new
+    @app ||= CalcEta::App.instance
   end
 
   def response_status

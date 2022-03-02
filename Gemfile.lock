@@ -58,8 +58,6 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.1)
     faraday-retry (1.0.3)
-    hanami-api (0.2.0)
-      hanami-router (~> 2.0.alpha)
     hanami-router (2.0.0.alpha6)
       mustermann (~> 1.0)
       mustermann-contrib (~> 1.0)
@@ -137,7 +135,7 @@ DEPENDENCIES
   dry-monads
   faraday
   faraday-retry
-  hanami-api
+  hanami-router
   hanami-validations!
   mock_redis
   puma
