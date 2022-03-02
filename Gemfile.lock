@@ -57,6 +57,7 @@ GEM
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.1)
+    faraday-retry (1.0.3)
     hanami-api (0.2.0)
       hanami-router (~> 2.0.alpha)
     hanami-router (2.0.0.alpha6)
@@ -135,6 +136,7 @@ DEPENDENCIES
   dotenv
   dry-monads
   faraday
+  faraday-retry
   hanami-api
   hanami-validations!
   mock_redis

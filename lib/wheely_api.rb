@@ -33,7 +33,8 @@ class WheelyApi
   private
 
   def connection
-    @connection = Faraday.new(ENV["WHEELY_API_URL"]) do |faraday|
+    @connection ||= Faraday.new(ENV["WHEELY_API_URL"]) do |faraday|
+      faraday.request :retry, { retry_statuses: [500], interval: 0.05 }
       faraday.request :json
       faraday.response :json
     end

@@ -21,6 +21,16 @@ describe WheelyApi do
       expect { cars }.to(raise_exception(WheelyApi::Error, "[WheelyApi]: 500 — Internal error!"))
     end
 
+    it "retries request if api responds with 500" do
+      success_body = load_fixture("cars_response.json", parse: false)
+      stub_request(:get, endpoint).with(query: params).to_return(
+        { status: 500, body: "Internal error!" },
+        { status: 200, body: success_body }
+      )
+
+      expect(cars).to eq(success_body)
+    end
+
     it "wraps faraday error with WheelyApi::Error" do
       stub_request(:get, endpoint).with(query: params).to_timeout
 
