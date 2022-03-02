@@ -11,6 +11,10 @@ class WheelyApi
     def predict(target:, source:)
       new.request(:post, "predict", target: target, source: source)
     end
+
+    def basic_error
+      Error
+    end
   end
 
   def request(verb, path, params = {})
