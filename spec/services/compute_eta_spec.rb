@@ -28,7 +28,7 @@ describe ComputeEta do
   end
 
   it "returns value from cache if present" do
-    CalcEta.cache.write(ComputeEta::Location.new(**location).cache_key, 3)
+    CalcEta.cache.set(ComputeEta::Location.new(**location).cache_key, 3)
 
     expect(compute_eta.value!).to eq(3)
   end
