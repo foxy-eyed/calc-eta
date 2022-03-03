@@ -4,7 +4,10 @@
 describe ComputeEta do
   include Dry::Monads[:result]
 
-  subject(:compute_eta) { described_class.new(validator, car_locator, arrival_predictor).call(location) }
+  subject(:compute_eta) do
+    described_class.new(validator: validator, car_locator: car_locator, arrival_predictor: arrival_predictor)
+                   .call(location)
+  end
 
   let(:validator) { instance_double(LocationValidator) }
   let(:car_locator) { instance_double(LocateNearbyCars) }
@@ -28,7 +31,7 @@ describe ComputeEta do
   end
 
   it "returns value from cache if present" do
-    CalcEta.cache.write(ComputeEta::Location.new(**location).cache_key, 3)
+    CalcEta.cache.set(ComputeEta::Location.new(**location).cache_key, 3)
 
     expect(compute_eta.value!).to eq(3)
   end

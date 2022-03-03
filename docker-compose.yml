@@ -6,8 +6,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
-    env_file: ./docker/.env.development
+      dockerfile: ./docker/development/Dockerfile
+    env_file: ./docker/development/.env
     ports:
       - "9292:9292"
     depends_on:
@@ -18,8 +18,8 @@ services:
   test:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
-    env_file: ./docker/.env.test
+      dockerfile: ./docker/test/Dockerfile
+    env_file: ./docker/test/.env
     volumes:
       - .:/usr/src/app
     command: bundle exec rspec

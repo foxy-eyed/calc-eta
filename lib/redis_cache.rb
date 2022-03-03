@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class RedisCache
-  DEFAULT_REDIS_URL = "redis://127.0.0.1:6379"
-  DB_KEY = 1
+  DEFAULT_REDIS_URL = "redis://127.0.0.1:6379/1"
 
   attr_reader :expires_in, :key_prefix
 
@@ -11,11 +10,11 @@ class RedisCache
     @key_prefix = key_prefix
   end
 
-  def read(key)
+  def get(key)
     redis.get(inner_key(key))
   end
 
-  def write(key, value)
+  def set(key, value)
     redis.set(inner_key(key), value, ex: expires_in)
   end
 
@@ -23,15 +22,15 @@ class RedisCache
     redis.exists?(inner_key(key))
   end
 
-  def delete(key)
+  def del(key)
     redis.del(inner_key(key))
   end
 
   def fetch(key, &block)
-    value = read(key)
+    value = get(key)
     if value.nil? && block_given?
       value = block.call
-      write(key, value)
+      set(key, value)
     end
     value
   end
@@ -56,7 +55,7 @@ class RedisCache
     @redis ||= if self.class.fake
                  MockRedis.new
                else
-                 Redis.new(url: ENV.fetch("REDIS_URL", DEFAULT_REDIS_URL), db: DB_KEY)
+                 Redis.new(url: ENV.fetch("REDIS_URL", DEFAULT_REDIS_URL))
                end
   end
 

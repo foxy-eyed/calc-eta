@@ -29,8 +29,8 @@ describe LocateNearbyCars do
 
   context "when api call fails" do
     it "fails with correct error message" do
-      allow(api).to receive(:cars).with(limit: kind_of(Integer), **location)
-                                  .and_raise(WheelyApi::Error, "Ouch!")
+      allow(api).to receive(:basic_error).and_return(WheelyApi::Error)
+      allow(api).to receive(:cars).with(limit: kind_of(Integer), **location).and_raise(api.basic_error, "Ouch!")
 
       expect(locate_cars).to be_failure
       expect(locate_cars.failure).to eq("Ouch!")

@@ -23,7 +23,8 @@ describe PredictArrival do
 
   context "when api call fails" do
     it "fails with correct error message" do
-      allow(api).to receive(:predict).with(**args).and_raise(WheelyApi::Error, "Broken!")
+      allow(api).to receive(:basic_error).and_return(WheelyApi::Error)
+      allow(api).to receive(:predict).with(**args).and_raise(api.basic_error, "Broken!")
 
       expect(predict_arrivals).to be_failure
       expect(predict_arrivals.failure).to eq("Broken!")

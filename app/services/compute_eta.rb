@@ -19,9 +19,9 @@ class ComputeEta
     end
   end
 
-  def initialize(validator = LocationValidator.new,
-                 car_locator = LocateNearbyCars.new,
-                 arrival_predictor = PredictArrival.new)
+  def initialize(validator: LocationValidator.new,
+                 car_locator: LocateNearbyCars.new,
+                 arrival_predictor: PredictArrival.new)
     @validator = validator
     @car_locator = car_locator
     @arrival_predictor = arrival_predictor
